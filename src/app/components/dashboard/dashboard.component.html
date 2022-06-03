@@ -1,0 +1,47 @@
+
+<div class='container'>
+  <h1>{{ title }}</h1>
+  <br/>
+  <p style="text-align:center">Last update: {{lastUpdate}}</p>
+  <br/>
+  <h2>Global Statistics</h2>
+    <div class="content">
+
+      <div class="row">
+        <div class="col">
+          <mat-card class="card" id="c1">
+            <mat-card-title-group>
+              <mat-card-title>Total Cases</mat-card-title>
+              <mat-card-subtitle>{{newCases}}</mat-card-subtitle>
+            </mat-card-title-group>
+            <mat-card-content>
+              {{totalCases}}
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <div class="col">
+          <mat-card class="card" id="c2">
+            <mat-card-title-group>
+              <mat-card-title>Total Recovered</mat-card-title>
+              <mat-card-subtitle></mat-card-subtitle>
+            </mat-card-title-group>
+            <mat-card-content>
+              {{totalRecovered}}
+            </mat-card-content>
+          </mat-card>
+
+        </div>
+        <div class="col">
+          <mat-card class="card" id="c3">
+            <mat-card-title-group>
+              <mat-card-title>Total Deaths</mat-card-title>
+              <mat-card-subtitle>{{newDeaths}}</mat-card-subtitle>
+            </mat-card-title-group>
+            <mat-card-content>
+              {{ totalDeaths}}
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+</div>

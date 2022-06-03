@@ -1,0 +1,50 @@
+.card {
+  max-width: 400px;
+  margin-bottom: 8px;
+  min-height: 130px;
+  border-left: 5px solid black;
+}
+
+h1 {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-weight: 500;
+  font-size: 40px;
+  text-align: center;;
+}
+
+
+.container {
+  padding: 5%;
+}
+
+h2 {
+  font-weight: bold;
+}
+
+#c1 {
+  background-color: #14a7e0;
+  box-shadow: 5px 5px lightblue;
+}
+
+#c2 {
+  background-color: #24bf5b;
+  box-shadow: 5px 5px lightgreen;
+}
+
+#c3 {
+  background-color: #f03c45;
+  box-shadow: 5px 5px lightpink;
+}
+
+mat-card-content {
+  font-weight: bolder;
+  font-size: 20px;
+  color: black;
+}
+
+mat-card-title {
+  color: #262625;
+  font-size: 15px;
+}
+
+
