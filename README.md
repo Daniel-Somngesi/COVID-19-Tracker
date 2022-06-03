@@ -1,4 +1,6 @@
-# Covid19Tracker
+# Covid-19 Tracker
+
+This application provides live global and by country COVID-19 statistics.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.4.
 
