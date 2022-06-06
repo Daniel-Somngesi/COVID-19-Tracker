@@ -1,6 +1,6 @@
 # Covid-19 Tracker
 
-This application provides live global and by country COVID-19 statistics.
+This application provides live global and by country COVID-19 statistics. Not complete. Expected completion date: 10 June 2022.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.4.
 
