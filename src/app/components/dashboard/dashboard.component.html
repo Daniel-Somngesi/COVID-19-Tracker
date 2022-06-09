@@ -1,5 +1,5 @@
 
-<div class='container'>
+<div class='container' style="display:block">
   <h1>{{ title }}</h1>
   <br/>
   <p style="text-align:center">Last update: {{lastUpdate}}</p>
@@ -56,10 +56,10 @@
     </mat-select>
   </mat-form-field>
 </div>
-<div style="margin-top:50px">
+<div style="margin-top:50px; ">
   <ngx-charts-bar-horizontal
-  [results]="singleDataOption"
-  [view]= "[700, 370]"
+  [results]="DataOption"
+  [view]= "[900, 350]"
 
   [gradient]="gradient"
   [xAxis]="xAxis"
@@ -86,10 +86,14 @@
   [tooltipDisabled]="tooltipDisabled"
   [roundEdges]="roundEdges">
   </ngx-charts-bar-horizontal>
+  <br/>
 </div>
+<br/>
+
+
 </div>
 
 
-<br>
+
 
 

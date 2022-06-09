@@ -1,18 +1,14 @@
+
+
 export const singleDataOption = [
   {
-    "name": "Item 1",
-    "value": 1345
+    "name": "Total Deaths",
+    "value": 1239000
   }, {
-    "name": "Item 2",
-    "value": 3553
+    "name": "Total Cases",
+    "value": 52000000
   }, {
-    "name": "Item 3",
-    "value": 2345
-  }, {
-    "name": "Item 4",
-    "value": 5345
-  }, {
-    "name": "Item 5",
-    "value": 4333
-  }
+    "name": "Total Recovery",
+    "value": 34000000
+  },
 ];

@@ -8,9 +8,11 @@ interface Country {
   viewValue: string;
 }
 
+
+
 let headers = new HttpHeaders({
 	'x-rapidapi-host': 'Covid-19-tracking.p.rapidapi.com',
-	'x-rapidapi-key':'43d514591bmsha830e3da6b3884bp1ab8fcjsn00fd6e80fba7'
+	'x-rapidapi-key':'43d514591bmsha830e3da6b3884bp1ab8fcjsn00fd6e80fba6'
 });
 
 @Component({
@@ -20,6 +22,18 @@ let headers = new HttpHeaders({
 })
 
 export class DashboardComponent implements OnInit {
+ DataOption:any[] = [
+  {
+    "name": "Total Deaths",
+    "value": 1239000
+  }, {
+    "name": "Total Cases",
+    "value": 52000000
+  }, {
+    "name": "Total Recovery",
+    "value": 34000000
+  },
+];
 
   totalCases: any;
   totalDeaths: any;
@@ -49,8 +63,8 @@ export class DashboardComponent implements OnInit {
   trimYAxisTicks: boolean = false;
   rotateXAxisTicks: boolean = false;
 
-  xAxisTicks: any[] = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5']
-  yAxisTicks: any[] = [100, 500, 1000, 2000, 3000]
+  xAxisTicks: any[] = ['Total Deaths', 'Item 2', 'Item 3', 'Item 4', 'Item 5']
+  yAxisTicks: any[] = [10000000, 20000000, 30000000, 40000000, 50000000, 60000000, 70000000, 80000000, 90000000, 100000000]
 
   animations: boolean = true; // animations on load
 
@@ -74,7 +88,7 @@ export class DashboardComponent implements OnInit {
   roundEdges: boolean = false;
 
 
-  constructor(private http: HttpClient) { Object.assign(this, { singleDataOption }); }
+  constructor(private http: HttpClient) { Object.assign( this.DataOption ); }
 
   countries: Country[] = [
     {value: 'country-0', viewValue: 'South Africa'},
