@@ -47,4 +47,8 @@ mat-card-title {
   font-size: 15px;
 }
 
+mat-form-field {
+  width: 30%;
+}
+
 

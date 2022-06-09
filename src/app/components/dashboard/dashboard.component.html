@@ -44,4 +44,52 @@
         </div>
       </div>
     </div>
+<br/>
+<div style="text-align: center;" class="countrystats">
+  <h2>Country Statistics</h2>
+  <mat-form-field appearance="fill">
+    <mat-label>Country</mat-label>
+    <mat-select class="formControl" [(ngModel)]="selectedCountry" >
+      <mat-option *ngFor="let country of countries" [value]="country.value"  >
+        {{country.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
+<div style="margin-top:50px">
+  <ngx-charts-bar-horizontal
+  [results]="singleDataOption"
+  [view]= "[700, 370]"
+
+  [gradient]="gradient"
+  [xAxis]="xAxis"
+  [yAxis]="yAxis"
+  [legend]="legend"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxisLabel]="yAxisLabel"
+  [yAxisLabel]="xAxisLabel"
+  [legendTitle]="legendTitle"
+  [legendPosition]="legendlocation"
+  [animations]="animations"
+  [showGridLines]="showGridLines"
+  [trimXAxisTicks]="trimXAxisTicks"
+  [trimYAxisTicks]="trimYAxisTicks"
+  [rotateXAxisTicks]="rotateXAxisTicks"
+  [maxXAxisTickLength]="maxXAxisTickLength"
+  [maxYAxisTickLength]="maxYAxisTickLength"
+  [xAxisTickFormatting]="formatNumber"
+  [yAxisTickFormatting]="formatString"
+  [xAxisTicks]="yAxisTicks"
+  [showDataLabel]="showDataLabel"
+  [barPadding]="barPadding"
+  [tooltipDisabled]="tooltipDisabled"
+  [roundEdges]="roundEdges">
+  </ngx-charts-bar-horizontal>
+</div>
+</div>
+
+
+<br>
+
+
