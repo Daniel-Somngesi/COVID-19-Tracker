@@ -54,7 +54,7 @@ export class DashboardComponent implements OnInit {
   xAxis: boolean = true;
   yAxis: boolean = true;
   yAxisLabel: string = 'Axis Label';
-  xAxisLabel: string = 'Axis Label';
+  xAxisLabel: string = ' Label';
   showXAxisLabel: boolean = true;
   showYAxisLabel: boolean = true;
   maxXAxisTickLength: number = 30;
