@@ -1,19 +1,8 @@
-import { singleDataOption } from 'src/app/_data/singleData';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { DashboardService } from './../../services/dashboard.service';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { LegendPosition } from '@swimlane/ngx-charts';
-
-interface Country {
-  value: string;
-  viewValue: string;
-}
-
-
-
-let headers = new HttpHeaders({
-	'x-rapidapi-host': 'Covid-19-tracking.p.rapidapi.com',
-	'x-rapidapi-key':'43d514591bmsha830e3da6b3884bp1ab8fcjsn00fd6e80fba6'
-});
+import { Country } from 'src/app/interface/interface';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,19 +11,10 @@ let headers = new HttpHeaders({
 })
 
 export class DashboardComponent implements OnInit {
- DataOption:any[] = [
-  {
-    "name": "Total Deaths",
-    "value": 1239000
-  }, {
-    "name": "Total Cases",
-    "value": 52000000
-  }, {
-    "name": "Total Recovery",
-    "value": 34000000
-  },
-];
+  @Output() countryUpdate = new EventEmitter();
 
+  selectedValue!: string;
+  selectedCountry: any;
   totalCases: any;
   totalDeaths: any;
   totalRecovered: any;
@@ -53,8 +33,8 @@ export class DashboardComponent implements OnInit {
   legendlocation = LegendPosition.Right;
   xAxis: boolean = true;
   yAxis: boolean = true;
-  yAxisLabel: string = 'Axis Label';
-  xAxisLabel: string = ' Label';
+  yAxisLabel: string = 'Number';
+  xAxisLabel: string = 'Status';
   showXAxisLabel: boolean = true;
   showYAxisLabel: boolean = true;
   maxXAxisTickLength: number = 30;
@@ -63,7 +43,7 @@ export class DashboardComponent implements OnInit {
   trimYAxisTicks: boolean = false;
   rotateXAxisTicks: boolean = false;
 
-  xAxisTicks: any[] = ['Total Deaths', 'Item 2', 'Item 3', 'Item 4', 'Item 5']
+  xAxisTicks: any[] = ['Total Deaths', 'Item 2', 'Item 3']
   yAxisTicks: any[] = [10000000, 20000000, 30000000, 40000000, 50000000, 60000000, 70000000, 80000000, 90000000, 100000000]
 
   animations: boolean = true; // animations on load
@@ -80,71 +60,80 @@ export class DashboardComponent implements OnInit {
   };
 
   activeEntries: any[] = []
-  barPadding: number = 5
+  barPadding: number = 20
   tooltipDisabled: boolean = false;
 
   yScaleMax: number = 4000;
 
   roundEdges: boolean = false;
+  value!: any;
 
-
-  constructor(private http: HttpClient) { Object.assign( this.DataOption ); }
+  constructor(private http: HttpClient, private service:DashboardService) { Object.assign( this.DataOption ); }
 
   countries: Country[] = [
-    {value: 'country-0', viewValue: 'South Africa'},
-    {value: 'country-1', viewValue: 'USA'},
-    {value: 'country-2', viewValue: 'Botswana'},
-    {value: 'country-3', viewValue: 'Australia'},
-    {value: 'country-4', viewValue: 'Brazil'},
-    {value: 'country-5', viewValue: 'Egypt'},
-    {value: 'country-6', viewValue: 'France'},
-    {value: 'country-7', viewValue: 'Germany'},
-    {value: 'country-8', viewValue: 'Ghana'},
-    {value: 'country-9', viewValue: 'Greece'},
-    {value: 'country-10', viewValue: 'India'},
-    {value: 'country-11', viewValue: 'Italy'},
-    {value: 'country-12', viewValue: 'Jamaica'},
-    {value: 'country-13', viewValue: 'Japan'},
-    {value: 'country-14', viewValue: 'Kenya'},
-    {value: 'country-15', viewValue: 'Lesotho'},
-    {value: 'country-16', viewValue: 'Maldives'},
-    {value: 'country-17', viewValue: 'Mexico'},
-    {value: 'country-18', viewValue: 'Mozambique'},
-    {value: 'country-19', viewValue: 'Netherlands'},
-    {value: 'country-20', viewValue: 'Nigeria'},
-    {value: 'country-21', viewValue: 'Pakistan'},
-    {value: 'country-22', viewValue: 'Russia'},
-    {value: 'country-23', viewValue: 'Senegal'},
-    {value: 'country-24', viewValue: 'Spain'},
-    {value: 'country-25', viewValue: 'Switzerland'},
+    {id: 1, viewValue: 'South Africa'},
+    {id: 2, viewValue: 'USA'},
+    {id: 3, viewValue: 'Botswana'},
+    {id: 4, viewValue: 'Australia'},
+    {id: 5, viewValue: 'Brazil'},
+    {id: 6, viewValue: 'Egypt'},
+    {id: 7, viewValue: 'France'},
+    {id: 8, viewValue: 'Germany'},
+    {id: 9, viewValue: 'Ghana'},
+    {id: 10, viewValue: 'Greece'},
+    {id: 11, viewValue: 'India'},
+    {id: 12, viewValue: 'Italy'},
+    {id: 13, viewValue: 'Jamaica'},
+    {id: 14, viewValue: 'Japan'},
+    {id: 15, viewValue: 'Kenya'},
+    {id: 16, viewValue: 'Lesotho'},
+    {id: 17, viewValue: 'Maldives'},
+    {id: 18, viewValue: 'Mexico'},
+    {id: 19, viewValue: 'Mozambique'},
+    {id: 20, viewValue: 'Netherlands'},
+    {id: 21, viewValue: 'Nigeria'},
+    {id: 22, viewValue: 'Pakistan'},
+    {id: 23, viewValue: 'Russia'},
+    {id: 24, viewValue: 'Senegal'},
+    {id: 25, viewValue: 'Spain'},
+    {id: 26, viewValue: 'Switzerland'},
   ];
-  selectedCountry: any =  'South Africa';
+
 
   ngOnInit(): void {
-    this.getAllCountriesData();
+
+      this.service.getAllCountriesData().subscribe((data) => {
+        if(data != "") {
+          const str1 = data["Total Cases_text"]
+          const num1 = parseInt(str1.replace(/,/g,''))
+          const str2 = data["Total Deaths_text"]
+          const num2 = parseInt(str2.replace(/,/g,''))
+          const str3 = data["Total Recovered_text"]
+          const num3 = parseInt(str3.replace(/,/g,''))
+          this.DataOption.push({"name":"Total Cases","value":num1})
+          this.DataOption.push({"name":"Total Deaths","value":num2})
+          this.DataOption.push({"name":"Total Recoveries","value":num3})
+        }
+        this.DataOption = [...this.DataOption];
+        this.lastUpdate = data["Last Update"]
+      })
+
+      this.service.getGlobalData().subscribe((data) => {
+        this.totalDeaths = data["Total Deaths_text"]
+        this.totalRecovered = data["Total Recovered_text"]
+        this.totalCases = data["Total Cases_text"]
+      })
 
   }
+  DataOption:any[] = [];
 
-  getCountry(country:any){
-    console.log(country);
+  handleInput(event: Event) {
+    this.value = (event.target as HTMLInputElement).value;
   }
 
+  changeCountry(e:Event){
 
-  getAllCountriesData(){
-    this.http.get<any>('https://covid-19-tracking.p.rapidapi.com/v1/World', {
-      headers: headers
-    })
-    .subscribe((data: any) => {
-      this.totalCases = data["Total Cases_text"];
-      this.totalDeaths = data["Total Deaths_text"];
-      this.totalRecovered = data["Total Recovered_text"];
-      this.newCases = data["New Cases_text"];
-      this.newDeaths = data["New Deaths_text"];
-      this.lastUpdate = data["Last Update"];
-      console.log(data);
-    });
   }
-
   onSelect(event: any) {
     console.log(event);
   }

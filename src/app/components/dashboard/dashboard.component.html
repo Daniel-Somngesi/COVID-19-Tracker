@@ -2,9 +2,8 @@
 <div class='container' style="display:block">
   <h1>{{ title }}</h1>
   <br/>
-  <p style="text-align:center">Last update: {{lastUpdate}}</p>
-  <br/>
   <h2>Global Statistics</h2>
+  <p style="text-align:center">Last update: {{lastUpdate}}</p>
     <div class="content">
 
       <div class="row">
@@ -45,12 +44,13 @@
       </div>
     </div>
 <br/>
-<div style="text-align: center;" class="countrystats">
+<div class="countrystats">
   <h2>Country Statistics</h2>
+  <p style="text-align:center">Last update: {{lastUpdate}}</p>
   <mat-form-field appearance="fill">
     <mat-label>Country</mat-label>
-    <mat-select class="formControl" [(ngModel)]="selectedCountry" >
-      <mat-option *ngFor="let country of countries" [value]="country.value"  >
+    <mat-select class="formControl" [(ngModel)]="selectedValue" (change)="changeCountry($event)">
+      <mat-option *ngFor="let country of countries; let i = index;"  [value]="i"  >
         {{country.viewValue}}
       </mat-option>
     </mat-select>
